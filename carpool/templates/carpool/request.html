@@ -1,0 +1,18 @@
+{% extends "carpool/loggedin.html" %}
+
+{% block header %}
+	<h2>Requests</h2>
+{% endblock %}
+
+{% block content %}
+	<div id="new-request">
+        <form method="POST" action="{% url 'make_request' %}">
+            <input type="text" name="text" class="form-control" id="id_post_text" placeholder="Leave a Review?">
+            {% csrf_token %}
+            <button type="submit" id="id_login_button" class="button">Request</button>
+        </form>
+    </div>
+	{% for request in requests %}
+		<div>Request goes here </div>
+	{% endfor %}
+{% endblock %}

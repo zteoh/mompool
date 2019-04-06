@@ -1,0 +1,15 @@
+{% extends "carpool/base.html" %}
+
+{% block nav-bar %}
+    {% if user.first_name %}
+    <ul>
+        <li><a href="{% url 'user' request.user.id %}">{{user.first_name}} {{user.last_name}}</a></li>
+        <li><a href="{% url 'logout' %}" class="button is-small is-secondary">Logout</a></li>
+    </ul>
+    {% else %}
+    <ul>
+        <li><a href="{% url 'login' %}" class="button is-small is-secondary">Login</a></li>
+        <li><a href="{% url 'register' %}" class="button is-small is-secondary">Register</a></li>
+    </ul>
+    {% endif %}
+{% endblock %}

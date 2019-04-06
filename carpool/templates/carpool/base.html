@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	    {% load staticfiles %}
+
+        <!-- Bulma CSS -->
+        <!-- <link rel="stylesheet" href="https://cdnjs.com/libraries/bulma" crossorigin="anonymous"> -->
+        <!-- <link href="{% static 'carpool/bulma.css' %}" rel="stylesheet" type="text/css"> -->
+        
+        <!-- DataTables -->
+        <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+        
+        <!-- Kube CSS/JS -->
+        <link href="{% static 'carpool/Kube.css' %}" rel="stylesheet" type="text/css">
+        <!-- Internal CCS file -->
+        <link href="{% static 'carpool/base.css' %}" rel="stylesheet" type="text/css">
+
+		<title> Car Pool Family </title>
+	</head>
+
+	<body>
+        <div class="page">
+            <div class="is-navbar-container">
+                <div class="is-brand">
+                    <a href="{% url 'home' %}"><b class="is-logo"><h2>Car Pool</h2></b></a>
+                    <a href="#"
+                        class="nav-toggle is-push-right-mobile is-shown-mobile icon-kube-menu"
+                        data-kube="toggle"
+                        data-target="#left-nav"></a>
+                </div>
+                <div class="is-navbar is-hidden-mobile" id="left-nav">
+                    <nav>
+                        <ul>
+                            <li><a href="{% url 'home' %}">Events</a></li>
+                            <li><a href="{% url 'request' %}">Request</a></li>
+                            <li><a href="">Something</a></li>
+                        </ul>
+                    </nav>
+                    <nav class="is-push-right">
+                        {% block nav-bar %}
+                        {% endblock %}
+                    </nav>
+                </div>
+            </div>
+
+            <div class="box flex-box">
+                {% block header %}
+                {% endblock %}
+            </div>
+
+            {% for error in errors %}
+                <div class="error">
+                    {{error}}
+                </div>
+            {% endfor %}
+
+            {% if message %}
+    	        <div class="message">
+    	            {{message}}
+    	        </div>
+    	    {% endif %}
+
+    	    <div class="content">
+    		    {% block content %}
+    		    {% endblock %}
+            </div>
+        </div>
+
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+        <!-- Kube JS (optional if you are using Kube CSS only) -->
+        <script src="{% static 'carpool/Kube.js' %}"></script>
+        <script>
+            $K.init();
+        </script>
+
+        <!-- DataTables -->
+        <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+        <script src="{% static 'carpool/base.js' %}"></script>
+
+	</body>
+</html>

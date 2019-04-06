@@ -1,0 +1,70 @@
+{% extends "carpool/loggedin.html" %}
+
+{% block header %}
+	<h2>User: {{profile.assoc_user.first_name}} {{profile.assoc_user.last_name}}</h2>
+{% endblock %}
+
+{% block content %}
+    <div class="is-row">
+        <div class="box is-col is-35">
+
+            <div class="box">
+                <h3> Information </h3>
+                {% if profile.pro_pic %}
+                        <img class="circle-crop" src="{% url 'photo' user.id %}" alt="{{profile.user}}" width=90%>
+                {% else %}
+                        {% load staticfiles %}
+                        <img class="circle-crop" src="{% static 'carpool/images/default.jpeg' %}">	
+                {% endif %}
+
+                {% if profile.assoc_user.id != request.user.id %}
+                    <textarea readonly id="id_user_bio" class="form-control">{{profile.bio_text}}</textarea>
+                {% else %}
+                    <form method="POST" action="{% url 'edit' user.id %}" enctype="multipart/form-data">
+                        <table>
+                        {% for field in form.visible_fields %}
+                            <tr>
+                                <td>{{field.label_tag}}</td>
+                                <td>{{field}}</td>
+                                <td class="error">
+                                    {% for error in field.errors %} {{error}} {% endfor %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                        {% for field in form.hidden_fields %}
+                            {{field}} {{field.errors}}
+                        {% endfor %}
+                        {% csrf_token %}
+
+                        <div style="display: flex; justify-content: flex-end">
+                        <button class="button" type="submit">Update</button>
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+                
+        </div>
+
+        <div class="is-col is-65">
+            <h3> Past Reviews </h3>
+
+            <div id="new-request">
+                <form method="POST" action="{% url 'make_review' profile.assoc_user.id %}">
+                    <input type="text" name="review_text" placeholder="What is happening?">
+                    {% csrf_token %}
+                    <button type="submit" id="id_login_button" class="button">Review</button>
+                </form>
+            </div>
+            {% for review in reviews %}
+                {% if review.user == profile.assoc_user.id %}
+                    <div class="review"> 
+                        <h4>{{review.assoc_user.first_name}} {{review.assoc_user.last_name}}</h4> : {{review.review_text}}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}

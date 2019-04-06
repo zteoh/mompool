@@ -1,0 +1,19 @@
+{% extends "carpool/loggedin.html" %}
+
+{% block content %}
+    <div id="centered-content">
+        <h2 id="centered-content">Login</h2>
+        <br>
+        <form method="post" action="{% url 'login' %}" id="centered-content">
+            <table>
+                {{form}}
+            </table>
+            {% csrf_token %}
+            <br>
+            <div class="form-item is-buttons">
+                <button type="submit" id="id_login_button" class="button">Submit</button>
+            </div>
+        </form>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "carpool/loggedin.html" %}
+
+{% block content %}
+    <h2 id="centered-content">Register</h2>
+    <br>
+    <form method="post" action="{% url 'register' %}" id="centered-content">
+        <table>
+            {% for field in form.visible_fields %}
+                <tr>
+                    <td>{{field.label_tag}}</td>
+                    <td>{{field}}</td>
+                    <td class="errorlist">
+                        {% for error in field.errors %} {{error}} {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br>
+        {% csrf_token %}
+        <div class="form-item is-buttons">
+            <button type="submit" id="id_register_button" class="button">Register</button>
+        </div>
+    </form>
+
+    {% for error in form.non_field_errors %}
+        <p class="errorlist">
+            {{ error }}
+        </p>
+    {% endfor %}
+{% endblock %}
