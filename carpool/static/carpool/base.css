@@ -44,6 +44,10 @@
 	text-align: right;
 }
 
+.bold {
+	font-weight: bold;
+}
+
 /* Create Page Styling */
 
 .is-logo {

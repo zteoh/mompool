@@ -59,7 +59,7 @@
             {% for review in reviews %}
                 {% if review.user == profile.assoc_user.id %}
                     <div class="review"> 
-                        <h4>{{review.assoc_user.first_name}} {{review.assoc_user.last_name}}</h4> : {{review.review_text}}
+                        <span class="bold">{{review.assoc_user.first_name}} {{review.assoc_user.last_name}}</span> : {{review.review_text}}
                     </div>
                 {% endif %}
             {% endfor %}
