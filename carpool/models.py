@@ -11,9 +11,11 @@ class Profile(models.Model):
 class Request(models.Model):
 	name = models.CharField(blank=True, max_length=200)
 	description = models.CharField(blank=True, max_length=200)
-	location = models.CharField(blank=True, max_length=200)
+	from_location = models.CharField(blank=True, max_length=200)
+	to_location = models.CharField(blank=True, max_length=200, default="none")
 	datetime = models.DateTimeField()
 	assoc_user  = models.ForeignKey(User, on_delete=models.PROTECT)
+	stage = models.CharField(blank=True, max_length=200, default="requested")
 
 class Review(models.Model):
 	review_text = models.CharField(blank=True, max_length=200)

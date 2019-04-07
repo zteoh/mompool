@@ -5,6 +5,63 @@
 {% endblock %}
 
 {% block content %}
+	
+	<h3> Rides Accepted </h3>
+	<div class="box center">
+        {% for request in requests_accepted %}
+        <div class="request">
+            <h4>{{request.name}}</h4>
+            
+            <p>
+                Pick Up: {{request.from_location}}<br>
+                Destination: {{request.to_location}}<br>
+                Date: {{request.datetime}}
+            </p>
+            <p>
+                {{request.description}}
+            </p>
+            <a href="{% url 'picked_request' request.id %}"><button class="button">Picked Up</button></a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h3> Rides In Progress </h3>
+	<div class="box center">
+        {% for request in requests_progress %}
+        <div class="request">
+            <h4>{{request.name}}</h4>
+            
+            <p>
+                Pick Up: {{request.from_location}}<br>
+                Destination: {{request.to_location}}<br>
+                Date: {{request.datetime}}
+            </p>
+            <p>
+                {{request.description}}
+            </p>
+            <a href="{% url 'complete_request' request.id %}"><button class="button">Completed</button></a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h3> Rides Completed </h3>
+	<div class="box center">
+        {% for request in requests_completed %}
+        <div class="request">
+            <h4>{{request.name}}</h4>
+            
+            <p>
+                Pick Up: {{request.from_location}}<br>
+                Destination: {{request.to_location}}<br>
+                Date: {{request.datetime}}
+            </p>
+            <p>
+                {{request.description}}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
 <!-- <div class="blob-box">
 	<div id="blob-1"></div>
 </div>

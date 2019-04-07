@@ -1,9 +1,22 @@
 /* Base Styling */
 
+html {
+	background-image: linear-gradient(to bottom, rgba(162,233,255,0.3), rgba(255,255,0,0.2));
+	min-height: 100vh;
+}
+
 .page {
 	width: 90%;
 	margin: auto;
 	margin-top: 20px;
+}
+
+input {
+	background-color: transparent;
+}
+
+textarea {
+	background-color: transparent;
 }
 
 .box {
@@ -32,8 +45,6 @@
 .center {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
-	text-align: center;
 }
 
 .is-navbar-container {
@@ -46,6 +57,10 @@
 
 .bold {
 	font-weight: bold;
+}
+
+button {
+	margin-top: 10px;
 }
 
 /* Create Page Styling */
@@ -310,26 +325,26 @@ table.dataTable.display td:not(:last-child){
 	max-width: 50%;
 }
 
-/*.flex-center h1 {
-	color: white;
-	padding-bottom: 20px;
-}*/
+/* Request Page */
 
-/* Donate Page */
-
-.stripe-button-el {
-	background-image: linear-gradient(#fefefe,#e1e1e1) !important;
-	box-shadow: none !important;
+.request {
+	/*width: 25%;*/
+	min-width: 300px;
+	margin: 20px;
+	padding: 30px;
+	background-color: rgb(255, 255, 255, 0.8);
+	border-radius: 10px;
 }
-	
-.stripe-button-el span {
-	display: block !important;
-	height: 50px !important;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
-	font-size: 16px !important;
-	background-image: none !important;
-	background: #0c3dd7 !important;
-	box-shadow: none !important;
-	padding: 10px 20px !important;
-	text-shadow: none !important;
+
+/*Profile Page*/
+
+input[type="file"] {
+	width: 100%;
+}
+
+.review {
+	background-color: rgb(255, 255, 255, 0.8);
+	margin: 20px 0px;
+	padding: 10px;
+	justify-content: space-between;
 }

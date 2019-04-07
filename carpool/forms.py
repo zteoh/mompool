@@ -74,7 +74,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = (
-            'assoc_user',
+            'assoc_user', 'content_type'
             )
         widgets = {
             'bio_text': forms.Textarea(attrs={'rows': 5})

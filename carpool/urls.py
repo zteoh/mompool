@@ -14,6 +14,9 @@ urlpatterns = [
     path('photo/<int:id>', views.get_photo, name='photo'),
 
     path('make_request', views.make_request, name="make_request"),
+    path('accept_request/<int:id>', views.accept_request, name="accept_request"),
+    path('picked_request/<int:id>', views.picked_request, name="picked_request"),
+    path('complete_request/<int:id>', views.complete_request, name="complete_request"),
     path('request', views.request_action, name="request"),
 
     path('make_review/<int:id>', views.make_review, name="make_review"),

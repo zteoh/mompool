@@ -74,13 +74,16 @@ def register_action(request):
 # === Views ===
 
 def home_action(request):
-    context = {}
+    requests_accepted = Request.objects.filter(stage = 'accepted')
+    requests_progress = Request.objects.filter(stage = 'progress')
+    requests_completed = Request.objects.filter(stage = 'completed')
+    context = {'requests_accepted':requests_accepted, 'requests_progress':requests_progress, 'requests_completed':requests_completed}
     return render(request, 'carpool/home.html', context)
 
 @login_required
 def request_action(request):
     errors = []
-    requests = {}
+    requests = Request.objects.filter(stage = 'requested')
     context = {'requests':requests}
     # my_profile = Profile.objects.get(user = request.user)
     # posts = Post.objects.filter(user__in=my_profile.following.all()).order_by('-datetime')
@@ -149,12 +152,34 @@ def edit_user_action(request, id):
 def make_request(request):
     new_request = Request(name=request.POST['name'],
                         description=request.POST['description'],
-                        location=request.POST['location'],
+                        from_location=request.POST['from_location'],
+                        to_location=request.POST['to_location'],
                         datetime=request.POST['datetime'],
                         assoc_user=request.user)
     new_request.save()
 
-    return redirect(request)
+    return redirect(request_action)
+
+def accept_request(request, id):
+    request = Request.objects.get(id = id)
+    request.stage = 'accepted'
+    request.save()
+
+    return redirect(home_action)
+
+def picked_request(request, id):
+    request = Request.objects.get(id = id)
+    request.stage = 'progress'
+    request.save()
+
+    return redirect(home_action)
+
+def complete_request(request, id):
+    request = Request.objects.get(id = id)
+    request.stage = 'completed'
+    request.save()
+
+    return redirect(home_action)
 
 def make_review(request, id):
     new_review = Review(review_text=request.POST['review_text'],
@@ -164,3 +189,4 @@ def make_review(request, id):
     new_review.save()
 
     return redirect(user_action, id)
+

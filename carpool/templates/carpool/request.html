@@ -7,13 +7,38 @@
 {% block content %}
 	<div id="new-request">
         <form method="POST" action="{% url 'make_request' %}">
-            <input type="text" name="name" class="form-control" id="id_post_text" placeholder="Make a Request?">
-            <input type="text" name="description" class="form-control" id="id_post_text" placeholder="Description">
-            {% csrf_token %}
-            <button type="submit" id="id_login_button" class="button">Request</button>
+            <div class="is-row">
+                <div class="is-col is-90">
+                    <input type="text" name="name" class="form-control" id="id_post_text" placeholder="Request Name">
+                    <input type="text" name="from_location" class="form-control" id="id_post_text" placeholder="Pick Up Location">
+                    <input type="text" name="to" class="form-control" id="id_post_text" placeholder="Destination Location">
+                    <input type="datetime-local" name="datetime">
+                    <textarea name="description" class="form-control" id="id_post_text" placeholder="Description"></textarea>
+                </div>
+                {% csrf_token %}
+                <div class="is-col is-10">
+                    <button type="submit" id="id_login_button" class="button">Request</button>
+                </div>
+            </div>
         </form>
     </div>
-	{% for request in requests %}
-		<div>Request goes here </div>
-	{% endfor %}
+
+    <div class="box center">
+        {% for request in requests %}
+        <div class="request">
+            <h4>{{request.name}}</h4>
+            
+            <p>
+                Pick Up: {{request.from_location}}<br>
+                Destination: {{request.to_location}}<br>
+                Date: {{request.datetime}}
+            </p>
+            <p>
+                {{request.description}}
+            </p>
+            <a href="{% url 'accept_request' request.id %}"><button class="button">Accept</button></a>
+        </div>
+        {% endfor %}
+    </div>
+
 {% endblock %}

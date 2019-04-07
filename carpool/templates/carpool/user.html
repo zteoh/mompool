@@ -51,7 +51,7 @@
 
             <div id="new-request">
                 <form method="POST" action="{% url 'make_review' profile.assoc_user.id %}">
-                    <input type="text" name="review_text" placeholder="What is happening?">
+                    <textarea name="review_text" placeholder="What is happening?"></textarea>
                     {% csrf_token %}
                     <button type="submit" id="id_login_button" class="button">Review</button>
                 </form>
@@ -59,7 +59,8 @@
             {% for review in reviews %}
                 {% if review.user == profile.assoc_user.id %}
                     <div class="review"> 
-                        <span class="bold">{{review.assoc_user.first_name}} {{review.assoc_user.last_name}}</span> : {{review.review_text}}
+                        <div class="bold">{{review.assoc_user.first_name}} {{review.assoc_user.last_name}}&emsp;<span>{{review.datetime}}</span></div>
+                        {{review.review_text}}
                     </div>
                 {% endif %}
             {% endfor %}
