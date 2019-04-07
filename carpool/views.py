@@ -92,6 +92,18 @@ def request_action(request):
     return render(request, 'carpool/request.html', context)
 
 @login_required
+def my_request_action(request):
+    errors = []
+    requests = Request.objects.filter(stage = 'requested')
+    context = {'requests':requests}
+    # my_profile = Profile.objects.get(user = request.user)
+    # posts = Post.objects.filter(user__in=my_profile.following.all()).order_by('-datetime')
+    # comment = Comment.objects.order_by('datetime')
+    # context = {'posts': posts, 'comments': comment, 'errors': errors}
+    return render(request, 'carpool/request.html', context)
+
+
+@login_required
 def user_action(request, id):
     context = {}
     other_user = User.objects.get(id = id)
