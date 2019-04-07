@@ -18,6 +18,7 @@ urlpatterns = [
     path('picked_request/<int:id>', views.picked_request, name="picked_request"),
     path('complete_request/<int:id>', views.complete_request, name="complete_request"),
     path('request', views.request_action, name="request"),
+    path('my_request', views.my_request_action, name="my_request"),
 
     path('make_review/<int:id>', views.make_review, name="make_review"),
 
